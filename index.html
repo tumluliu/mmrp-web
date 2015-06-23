@@ -1,24 +1,92 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title></title>
+    <meta charset=utf-8 />
+    <title>Driving directions</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
     <script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.css' rel='stylesheet' />
+    <link href='https://www.mapbox.com/base/latest/base.css' rel='stylesheet' />
     <style>
         body { margin:0; padding:0; }
         #map { position:absolute; top:0; bottom:0; width:100%; }
     </style>
 </head>
 <body>
+<style>
+    #inputs,
+    #errors,
+    #directions {
+        position: absolute;
+        width: 33.3333%;
+        max-width: 300px;
+        min-width: 200px;
+    }
+
+    #inputs {
+        z-index: 10;
+        top: 10px;
+        left: 10px;
+    }
+
+    #directions {
+        z-index: 99;
+        background: rgba(0,0,0,.8);
+        top: 0;
+        right: 0;
+        bottom: 0;
+        overflow: auto;
+    }
+
+    #errors {
+        z-index: 8;
+        opacity: 0;
+        padding: 10px;
+        border-radius: 0 0 3px 3px;
+        background: rgba(0,0,0,.25);
+        top: 90px;
+        left: 10px;
+    }
+
+</style>
+
+<script src='js/mmrp.js'></script>
+<link rel='stylesheet' href='css/mmrp.css' type='text/css' />
 
 <div id='map'></div>
+<div id='inputs'></div>
+<div id='errors'></div>
+<div id='directions'>
+    <div id='routes'></div>
+    <div id='instructions'></div>
+</div>
 <script>
     L.mapbox.accessToken = 'pk.eyJ1IjoibGxpdSIsImEiOiI4dW5uVkVJIn0.jhfpLn2Esk_6ZSG62yXYOg';
-    var map = L.mapbox.map('map', 'mapbox.streets')
-            .setView([48.1373, 11.5758], 13);
-</script>
+    var map = L.mapbox.map('map', 'mapbox.streets', {
+        zoomControl: false
+    }).setView([48.1373, 11.5758], 13);
 
+    // move the attribution control out of the way
+    map.attributionControl.setPosition('bottomleft');
+
+    // create the initial directions object, from which the layer
+    // and inputs will pull data.
+    var directions = L.mmrp();
+
+    var directionsLayer = L.mmrp.layer(directions)
+            .addTo(map);
+
+    var directionsInputControl = L.mmrp.inputControl('inputs', directions)
+            .addTo(map);
+
+    var directionsErrorsControl = L.mmrp.errorsControl('errors', directions)
+            .addTo(map);
+
+    var directionsRoutesControl = L.mmrp.routesControl('routes', directions)
+            .addTo(map);
+
+    var directionsInstructionsControl = L.mmrp.instructionsControl('instructions', directions)
+            .addTo(map);
+</script>
 </body>
 </html>
