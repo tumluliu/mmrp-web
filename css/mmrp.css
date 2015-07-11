@@ -50,7 +50,7 @@
     font-size: 12px;
     width: 100%;
     border: 0;
-    background-color: transparent;
+    /*background-color: transparent;*/
     height: 40px;
     margin: 0;
     color: rgba(0,0,0,.5);
@@ -58,6 +58,7 @@
 }
 
 .mapbox-directions-inputs input:focus {
+    background-color: transparent;
     color: rgba(0,0,0,.75);
     outline:0;
     box-shadow: none;
@@ -118,10 +119,12 @@ input:not(:valid) + .mapbox-close-icon {
 }
 
 .mapbox-directions-profile input[type=radio] {
+    background-color: transparent;
     display: none;
 }
 
 .mapbox-directions-profile input[type=checkbox] {
+    background-color: transparent;
     cursor: pointer;
     vertical-align: middle;
     display: inline-block;
@@ -135,6 +138,7 @@ input:not(:valid) + .mapbox-close-icon {
 }
 
 .mapbox-directions-profile input[type=checkbox] + label {
+    background-color: transparent;
     vertical-align: middle;
     text-align: left;
     font-size: 14px;
@@ -143,16 +147,17 @@ input:not(:valid) + .mapbox-close-icon {
 }
 
 .mapbox-directions-profile input[type=button] {
-    background-color: #3887be;
+    background-color:#3887be;
+    width: 300px;
     text-align: center;
     color: #fff;
     display: inline-block;
-    margin: 0px;
-    padding: 10px;
+    margin-left: -2px;
+    padding: 0px;
     position: relative;
     border: none;
     cursor: pointer;
-    border-radius: 3px;
+    border-radius: 2px;
     white-space: nowrap;
     text-overflow: ellipsis;
     font-family: 'Open Sans Bold', sans-serif;
@@ -160,6 +165,15 @@ input:not(:valid) + .mapbox-close-icon {
     font-size: 12px;
     -webkit-appearance: none;
     -webkit-font-smoothing: antialiased;
+}
+
+.mapbox-directions-profile input[type=button]:hover,
+.mapbox-directions-profile input[type=button].active {
+    background-color:#3bb2d0;
+}
+
+.mapbox-directions-profile input[type=button]:focus {
+    box-shadow: inset 0 0 0 3px rgba(0,0,0,0.1);
 }
 
 /* Errors */
