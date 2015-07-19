@@ -30,7 +30,7 @@
     }
 
     #directions {
-        z-index: 99;
+        z-index: 2000;
         background: rgba(0,0,0,.8);
         top: 0;
         right: 0;
@@ -47,21 +47,26 @@
         top: 90px;
         left: 10px;
     }
-    #tracklist{
+    #tracks{
         position: fixed;
         bottom: 0;
         width: 100%;
+        z-index: 1000;
+        background-color: rgba(255,255,255,.8);
+        padding-right: 300px;
     }
     #table{
         display: block;
         height: 200px;
         overflow-y: scroll;
+        z-index: 1000;
     }
 
 </style>
 
 <script src='scripts/mmrp.js'></script>
 <link rel='stylesheet' href='styles/mmrp.css' type='text/css' />
+<!--<script src="scripts/app.js" type="text/javascript" charset="utf-8"></script>-->
 
 <div id='map'></div>
 <div id='inputs'></div>
@@ -70,10 +75,7 @@
     <div id='routes'></div>
     <div id='instructions'></div>
 </div>
-<div id="tracklist">
-    <table id="table" class="prose">
-    </table>
-</div>
+<div id="tracks"></div>
 <script>
     L.mapbox.accessToken = 'pk.eyJ1IjoibGxpdSIsImEiOiI4dW5uVkVJIn0.jhfpLn2Esk_6ZSG62yXYOg';
     var map = L.mapbox.map('map', 'mapbox.streets', {
@@ -100,6 +102,9 @@
             .addTo(map);
 
     var directionsInstructionsControl = L.mmrp.instructionsControl('instructions', directions)
+            .addTo(map);
+
+    var tracksTableControl = L.mmrp.tracksControl('tracks', directions)
             .addTo(map);
 </script>
 </body>
