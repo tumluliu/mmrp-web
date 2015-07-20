@@ -54,12 +54,22 @@
         z-index: 1000;
         background-color: rgba(255,255,255,.8);
         padding-right: 300px;
+        height: 240px;
     }
     #table{
         display: block;
-        height: 200px;
+        height: 190px;
         overflow-y: scroll;
         z-index: 1000;
+    }
+    [data-control=paging] {
+        padding: 10px;
+    }
+    [data-control=paging] a {
+        margin: 10px;
+    }
+    [data-control=paging] a.selected {
+        font-weight: bold;
     }
 
 </style>
